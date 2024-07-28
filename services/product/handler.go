@@ -2,15 +2,15 @@ package product
 
 import (
 	"net/http"
+	"storage/configuration"
 	"strconv"
 
 	"github.com/gin-gonic/gin"
-	"gorm.io/gorm"
 )
 
-func HandlerGetAllProducts(db *gorm.DB) gin.HandlerFunc {
+func HandlerGetAllProducts(conf *configuration.Config) gin.HandlerFunc {
 	return func(c *gin.Context) {
-		products, err := RepoGetAllProducts(db)
+		products, err := RepoGetAllProducts(conf.Db)
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to retrieve products: " + err.Error()})
 			return
@@ -20,7 +20,7 @@ func HandlerGetAllProducts(db *gorm.DB) gin.HandlerFunc {
 
 }
 
-func HandlerGetProductById(db *gorm.DB) gin.HandlerFunc {
+func HandlerGetProductById(conf *configuration.Config) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		productIdStr := c.Query("id")
 		if productIdStr == "" {
@@ -34,7 +34,7 @@ func HandlerGetProductById(db *gorm.DB) gin.HandlerFunc {
 			return
 		}
 
-		product, err := RepoGetProductById(db, productId)
+		product, err := RepoGetProductById(conf.Db, productId)
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to retrieve product: " + err.Error()})
 			return
@@ -49,7 +49,7 @@ func HandlerGetProductById(db *gorm.DB) gin.HandlerFunc {
 	}
 }
 
-func HandlerGetProductByIdDetailed(db *gorm.DB) gin.HandlerFunc {
+func HandlerGetProductByIdDetailed(conf *configuration.Config) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		productIdStr := c.Query("id")
 		if productIdStr == "" {
@@ -63,7 +63,7 @@ func HandlerGetProductByIdDetailed(db *gorm.DB) gin.HandlerFunc {
 			return
 		}
 
-		product, err := RepoGetProductByIdDetailed(db, productId)
+		product, err := RepoGetProductByIdDetailed(conf.Db, productId)
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to retrieve product: " + err.Error()})
 			return

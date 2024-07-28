@@ -2,14 +2,14 @@ package categories
 
 import (
 	"net/http"
+	"storage/configuration"
 
 	"github.com/gin-gonic/gin"
-	"gorm.io/gorm"
 )
 
-func HandlerGetAllCategories(db *gorm.DB) gin.HandlerFunc {
+func HandlerGetAllCategories(conf *configuration.Config) gin.HandlerFunc {
 	return func(c *gin.Context) {
-		categories, err := RepoGetAllCategories(db)
+		categories, err := RepoGetAllCategories(conf.Db)
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to retrieve categories: " + err.Error()})
 			return

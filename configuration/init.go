@@ -10,7 +10,6 @@ import (
 )
 
 var Configuration *Config
-var Database *gorm.DB
 
 func LoadConfig() *Config {
 	data, err := os.ReadFile("./configuration/config.json")
@@ -23,15 +22,17 @@ func LoadConfig() *Config {
 		log.Fatalf("Failed to unmarshal JSON: %v", err)
 	}
 
+	Configuration.Db = SetUpDatabase()
+
 	return Configuration
 }
 
-func SetUpDatabase(conf *Config) *gorm.DB {
-	dsn := "user=" + conf.Database.User +
-		" password=" + conf.Database.Password +
-		" dbname=" + conf.Database.DatabaseName +
-		" port=" + conf.Database.Port +
-		" host=" + conf.Database.Host +
+func SetUpDatabase() *gorm.DB {
+	dsn := "user=" + Configuration.Database.User +
+		" password=" + Configuration.Database.Password +
+		" dbname=" + Configuration.Database.DatabaseName +
+		" port=" + Configuration.Database.Port +
+		" host=" + Configuration.Database.Host +
 		" sslmode=disable"
 
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
