@@ -3,3 +3,5 @@
 2024/07/28 - 23:30:09 | 404 |           0s |                 ::1 | GET     /api/products
 2024/07/28 - 23:30:10 | 404 |           0s |                 ::1 | GET     /api/product
 2024/07/28 - 23:30:41 | 200 |   536.8339ms |                 ::1 | GET     /api/get-products
+2024/07/28 - 14:28:53 | 200 |   543.9534ms |                 ::1 | GET     /api/get-categories
+2024/07/28 - 14:29:08 | 200 |     5.2445ms |                 ::1 | GET     /api/get-categories
