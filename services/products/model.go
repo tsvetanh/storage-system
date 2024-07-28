@@ -1,4 +1,4 @@
-package services
+package products
 
 type Product struct {
 	ProductID          int      `gorm:"column:product_id;primaryKey" json:"product_id"`

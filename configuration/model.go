@@ -1,8 +1,11 @@
 package configuration
 
+import "gorm.io/gorm"
+
 type Config struct {
 	Port     string `json:"port"`
-	Database DB     `json:"database"`
+	Db       *gorm.DB
+	Database DB `json:"database"`
 }
 
 type DB struct {
