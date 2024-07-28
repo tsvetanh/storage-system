@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"storage/configuration"
 	"storage/middleware"
-	"storage/services"
+	"storage/services/product"
 
 	"github.com/gin-gonic/gin"
 )
@@ -27,9 +27,9 @@ func main() {
 	})
 
 	apiGroup := r.Group("/api")
-	apiGroup.GET("/get-products", services.HandlerGetAllProducts(db))
-	apiGroup.GET("/get-product", services.HandlerGetProductById(db))
-	apiGroup.GET("/get-product-detailed", services.HandlerGetProductByIdDetailed(db))
+	apiGroup.GET("/get-products", product.HandlerGetAllProducts(db))
+	apiGroup.GET("/get-product", product.HandlerGetProductById(db))
+	apiGroup.GET("/get-product-detailed", product.HandlerGetProductByIdDetailed(db))
 
 	// Start the server
 	if err := r.Run(":" + c.Port); err != nil {
