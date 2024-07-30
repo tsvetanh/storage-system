@@ -24,7 +24,7 @@ func main() {
 	apiGroup := r.Group("/api")
 	apiGroup.GET("/get-products", product.HandlerGetAllProducts(c))
 	apiGroup.GET("/get-product", product.HandlerGetProductById(c))
-	apiGroup.GET("/get-product-detailed", product.HandlerGetProductByIdDetailed(c))
+	// apiGroup.GET("/get-product-detailed", product.HandlerGetProductByIdDetailed(c))
 	apiGroup.GET("/get-categories", categories.HandlerGetAllCategories(c))
 
 	if err := r.Run(":" + c.Port); err != nil {
